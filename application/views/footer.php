@@ -1,7 +1,7 @@
  
 
 <script>
-  var siteUrl ='http://universitiesconnect.com/admin/';
+  var siteUrl ="<?php echo base_url()?>";
 </script>
 <footer class="br-footer">
         <div class="footer-left">

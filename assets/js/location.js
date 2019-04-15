@@ -25,7 +25,7 @@
         }
 
 function locationInfo() {
-    var rootUrl = "http://universitiesconnect.com/admin/Location/getApi";
+    var rootUrl = siteUrl+"Location/getApi";
     var call = new ajaxCall();
     this.getCities = function(id) {
         $(".cities option:gt(0)").remove();
