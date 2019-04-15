@@ -28,8 +28,8 @@
                     </div><!-- d-flex -->
                 </div>
             <?php } ?>
-               <form id="student-form" class="addform" action="<?= site_url('Student/addStudent'); ?>" method="post" data-parsley-validate> 
-            
+            <form id="student-form" class="addform" action="<?= site_url('Student/updateStudent/'.$studentList[0]->mid); ?>" method="post" data-parsley-validate> 
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
@@ -37,29 +37,36 @@
                             <div class="panel-body">
                                 <div class="col-sm-12">
                                     <div class="row">
-<?php  $acy=$studentList[0]->acadamic_year;  ?>
-<?php  $regId=$studentList[0]->stu_unique_id;  ?>
-<?php  $admission=$studentList[0]->stu_admission_date;  ?>
-<?php  $roll=$studentList[0]->stu_roll_number;  ?>
-<?php  $first_name=$studentList[0]->stu_first_name;  ?>
-<?php  $middle_name=$studentList[0]->stu_middle_name;  ?>
-<?php  $last_name=$studentList[0]->stu_last_name;  ?>
-<?php  $gender=$studentList[0]->stu_gender;  ?>
-<?php  $bithplace=$studentList[0]->stu_birthplace;  ?>
-<?php  $email=$studentList[0]->email;  ?>
-<?php  $mobile=$studentList[0]->mobile;  ?>
-<?php  $dob=$studentList[0]->stu_dob;  ?>
-<?php  $blood=$studentList[0]->stu_bloodgroup;  ?>
+                                        <?php $acy = $studentList[0]->acadamic_year; ?>
+                                        <?php $regId = $studentList[0]->stu_unique_id; ?>
+                                        <?php $admission = $studentList[0]->stu_admission_date; ?>
+                                        <?php $roll = $studentList[0]->stu_roll_number; ?>
+                                        <?php $first_name = $studentList[0]->stu_first_name; ?>
+                                        <?php $middle_name = $studentList[0]->stu_middle_name; ?>
+                                        <?php $last_name = $studentList[0]->stu_last_name; ?>
+                                        <?php $gender = $studentList[0]->stu_gender; ?>
+                                        <?php $bithplace = $studentList[0]->stu_birthplace; ?>
+                                        <?php $email = $studentList[0]->email; ?>
+                                        <?php $mobile = $studentList[0]->mobile; ?>
+                                        <?php $dob = $studentList[0]->stu_dob; ?>
+                                        <?php $blood = $studentList[0]->stu_bloodgroup; ?>
+                                        <?php  $courseId=$studentList[0]->stu_master_course_id;  ?>
+                                        <?php  $batchId=$studentList[0]->stu_master_batch_id;  ?>
+                                        <?php  $padd=$studentList[0]->stu_padd;  ?>
+                                        <?php  $cadd=$studentList[0]->stu_cadd;  ?>
+
+
+
                                         <div class="form-group col-sm-4">
                                             <label for="reg_input" class="req">Academic Year</label>
                                             <select class="form-control" name="academicid" id="Student_academicid" required>
                                                 <option value="">Select Academic Year</option>                                                
-                                                  <option value="2019 - 2020" <?php if($acy=="2019 - 2020") echo "selected" ; ?>>2019 - 2020</option>
-                                                <option value="2021 - 2022" <?php if($acy=="2021 - 2022") echo "selected" ; ?>>2021 - 2022</option>
-                                                <option value="2022 - 2023" <?php if($acy=="2022 - 2023") echo "selected" ; ?>>2022 - 2023</option>
-                                                <option value="2020 - 2029" <?php if($acy=="2023 - 2029") echo "selected" ; ?>>2023 - 2024</option>
-                                                
-                                              
+                                                <option value="2019 - 2020" <?php if ($acy == "2019 - 2020") echo "selected"; ?>>2019 - 2020</option>
+                                                <option value="2021 - 2022" <?php if ($acy == "2021 - 2022") echo "selected"; ?>>2021 - 2022</option>
+                                                <option value="2022 - 2023" <?php if ($acy == "2022 - 2023") echo "selected"; ?>>2022 - 2023</option>
+                                                <option value="2020 - 2029" <?php if ($acy == "2023 - 2029") echo "selected"; ?>>2023 - 2024</option>
+
+
                                             </select><div class="school_val_error" id="Student_academicid_em_" style="display:none"></div>                        
                                         </div> 
                                         <div class="form-group col-sm-4">
@@ -79,8 +86,8 @@
                                             <label for="reg_input" class="req">Course</label>
                                             <select class="form-control" name="courseid" id="Student_courseid" required>
                                                 <option value="">Select Course</option>
-                                               <?php foreach($courses as $course){ ?>
-                                                <option value="<?= $course->id; ?>"><?= strtoupper($course->course_name); ?></option>
+                                                <?php foreach ($courses as $course) { ?>
+                                                    <option value="<?= $course->id; ?>" <?php if($courseId==$course->id) echo"selected"; ?>><?= strtoupper($course->course_name); ?></option>
                                                 <?php } ?>
 
                                             </select><div class="school_val_error" id="Student_courseid_em_" style="display:none"></div>                            </div>  
@@ -88,8 +95,8 @@
                                             <label for="reg_input" class="req">Batch</label>
                                             <select class="form-control" name="batchid" id="Student_batchid" required>
                                                 <option value="">Select Batch</option>
-                                                    <?php foreach($batches as $batch){ ?>
-                                                <option value="<?= $batch->id; ?>"><?= strtoupper($batch->batch_name); ?></option>
+                                                <?php foreach ($batches as $batch) { ?>
+                                                    <option value="<?= $batch->id; ?>" <?php if($batchId==$batch->id) echo"selected"; ?>><?= strtoupper($batch->batch_name); ?></option>
                                                 <?php } ?>
                                             </select><div class="school_val_error" id="Student_batchid_em_" style="display:none"></div>                            </div>
                                         <div class="form-group col-sm-4">
@@ -110,7 +117,7 @@
                                             <input class="form-control" value= "<?= $middle_name; ?>" name="student_middlename" id="Student_student_middlename" type="text" maxlength="45" /><div class="school_val_error" id="Student_student_middlename_em_" style="display:none"></div>                            </div>
                                         <div class="form-group col-sm-4">
                                             <label for="reg_input_name">Last Name</label>
-                                            <input class="form-control"  value="<?= $last_name;  ?>" name="student_lastname" id="Student_student_lastname" type="text" maxlength="45" required/><div class="school_val_error" id="Student_student_lastname_em_" style="display:none"></div>                            </div>
+                                            <input class="form-control"  value="<?= $last_name; ?>" name="student_lastname" id="Student_student_lastname" type="text" maxlength="45" required/><div class="school_val_error" id="Student_student_lastname_em_" style="display:none"></div>                            </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
@@ -123,21 +130,21 @@
                                             <label for="Gender">Gender</label>
                                             <select class="form-control" data-required="true" name="student_gender" id="Student_student_gender" required>
                                                 <option value="">Please Select</option>
-                                                <option value="male" <?php if($gender=="male") echo "selected"; ?>>Male</option>
-                                                <option value="female" <?php if($gender=="female") echo "selected"; ?>>Female</option>
+                                                <option value="male" <?php if ($gender == "male") echo "selected"; ?>>Male</option>
+                                                <option value="female" <?php if ($gender == "female") echo "selected"; ?>>Female</option>
                                             </select><div class="school_val_error" id="Student_student_gender_em_" style="display:none"></div>                            </div>
                                         <div class="form-group col-sm-4">
                                             <label for="Blood_Group" >Blood Group</label>
                                             <select class="form-control" name="student_bloodgroup" id="Student_student_bloodgroup" required>
                                                 <option value="">Please Select</option>
-                                                <option value="A+" <?php if($blood=="A+") echo "selected"; ?>>A+</option>
-                                                <option value="A-" <?php if($blood=="A-") echo "selected"; ?>>A-</option>
-                                                <option value="B+" <?php if($blood=="B+") echo "selected"; ?>>B+</option>
-                                                <option value="B-" <?php if($blood=="B-") echo "selected"; ?>>B-</option>
-                                                <option value="O+" <?php if($blood=="O+") echo "selected"; ?>>O+</option>
-                                                <option value="O-" <?php if($blood=="O-") echo "selected"; ?>>O-</option>
-                                                <option value="AB+" <?php if($blood=="AB+") echo "selected"; ?>>AB+</option>
-                                                <option value="AB-" <?php if($blood=="AB-") echo "selected"; ?>>AB-</option>
+                                                <option value="A+" <?php if ($blood == "A+") echo "selected"; ?>>A+</option>
+                                                <option value="A-" <?php if ($blood == "A-") echo "selected"; ?>>A-</option>
+                                                <option value="B+" <?php if ($blood == "B+") echo "selected"; ?>>B+</option>
+                                                <option value="B-" <?php if ($blood == "B-") echo "selected"; ?>>B-</option>
+                                                <option value="O+" <?php if ($blood == "O+") echo "selected"; ?>>O+</option>
+                                                <option value="O-" <?php if ($blood == "O-") echo "selected"; ?>>O-</option>
+                                                <option value="AB+" <?php if ($blood == "AB+") echo "selected"; ?>>AB+</option>
+                                                <option value="AB-" <?php if ($blood == "AB-") echo "selected"; ?>>AB-</option>
                                             </select><div class="school_val_error" id="Student_student_bloodgroup_em_" style="display:none"></div>                            </div>
                                     </div>
                                     <div class="row">
@@ -145,8 +152,8 @@
                                             <label for="reg_input_name" >Email</label>
                                             <input maxlength="45" value="<?= $email; ?>" class="form-control" name="student_email" id="Student_student_email" type="email" required/><div class="school_val_error" id="Student_student_birthplace_em_" style="display:none"></div>       
                                         </div>
-                                        
-                                          <div class="form-group col-sm-4">
+
+                                        <div class="form-group col-sm-4">
                                             <label for="reg_input_name" >Mobile Number</label>
                                             <input maxlength="45" value="<?= $mobile; ?>" class="form-control" name="mobile" id="Student_student_mobile" type="text" required/><div class="school_val_error" id="Student_student_birthplace_em_" style="display:none"></div>       
                                         </div>
@@ -159,10 +166,10 @@
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="reg_input_name">Permanent Address</label>
-                                            <textarea class="form-control" name="student_p_address" id="Student_student_address2"></textarea><div class="school_val_error" id="Student_student_address2_em_" style="display:none"></div>                            </div>
+                                            <textarea class="form-control" name="student_p_address" id="Student_student_address2"><?php echo $padd; ?></textarea><div class="school_val_error" id="Student_student_address2_em_" style="display:none"></div>                            </div>
                                         <div class="form_group col-sm-6">
                                             <label for="reg_input_name" class="req">Present Address</label>
-                                            <textarea class="form-control" name="student_c_address1" id="Student_student_address1"></textarea><div class="school_val_error" id="Student_student_address1_em_" style="display:none"></div>                            </div>
+                                            <textarea class="form-control" name="student_c_address1" id="Student_student_address1"><?php echo $cadd; ?></textarea><div class="school_val_error" id="Student_student_address1_em_" style="display:none"></div>                            </div>
                                     </div>
                                 </div>
                                 <div class="row buttons">
@@ -172,8 +179,8 @@
                                     </div>
                                 </div>
                                 <div class="form-layout-footer bd pd-20 bd-t-0">
-                                    <button type="submit" class="btn btn-info">Save</button>
-                                    
+                                    <button type="submit" class="btn btn-info">Update</button>
+
                                 </div><!-- form-group -->
                                 </form>                 
 

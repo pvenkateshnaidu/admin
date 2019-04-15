@@ -165,6 +165,7 @@ class Student extends CI_Controller {
         $html = $this->load->view('admin/addStudent', $result, TRUE);
         $this->templet('home', $html, '', $result["error_message"], $result["success_message"]);
     }
+   
 
     public function studentList() {
         $result = '';
@@ -236,26 +237,66 @@ class Student extends CI_Controller {
         $this->templet('home', $html, '', '', '');
     }
 
-    public function updateStudent($id) {
-        $where = array('cid' => $id);
+    public function updateStudent($id) 
+    {
+      $result = '';
+        $success = '';
+        $error = '';
+        
+        $where = array('mid' => $id);
         if (!empty($id)) {
+       
             $param = array(
-                "college_name" => $this->input->post('college_name'),
-                "college_code" => $this->input->post('college_code'),
-                'priniciple_name' => $this->input->post('priniciple_name'),
-                "college_email" => $this->input->post('college_email'),
-                "address" => $this->input->post('address'),
-                "mobile" => $this->input->post('mobile'),
-                "city_id" => $this->input->post('city'),
-                "state_id" => $this->input->post('state'),
+                "acadamic_year" => $this->input->post('academicid'),
+              //  "created_by"=>  $this->userid,
+                'stu_unique_id' => $this->input->post('student_admissionno'),
+                "stu_roll_number" => $this->input->post('student_rollno'),
+                "stu_first_name" => $this->input->post('student_firstname'),
+                "stu_middle_name" => $this->input->post('student_middlename'),
+                "stu_last_name" => $this->input->post('student_lastname'),
+                "stu_dob" => $this->input->post('student_dob'),
+                "stu_admission_date" => $this->input->post('student_admissiondate'),
+                "stu_gender" => $this->input->post('student_gender'),
+                "stu_bloodgroup" => $this->input->post('student_bloodgroup'),
+                "stu_birthplace" => $this->input->post('student_birthplace'),
             );
-            $result['college'] = $this->BaseModel->updateData("colleges", $param, $where);
-            $this->session->set_tempdata("message", "Successfully Updated  college.", 2);
+            $param2 = array(
+                "stu_padd" => $this->input->post('student_p_address'),
+                "stu_cadd" => $this->input->post('student_c_address1'),
+            );
+            $param3 = array(
+                "email" => $this->input->post('student_email'),
+                "mobile" => $this->input->post('mobile'),
+                "role_id" => 5,
+              //  'college_id' => $this->get_current_user_collegeId(),
+               // 'created_by' => $this->userid,
+                'status' => 1
+            );
+            $param4 = array(
+                "stu_master_course_id" => $this->input->post('courseid'),
+              //   'created_by' => $this->userid,
+                "stu_master_batch_id" => $this->input->post('batchid'),
+              
+            );
+            $this->load->model("Student_model");
+            $resultValue = $this->Student_model->updateStudent($id,$param, $param2, $param3, $param4);
+            if ($resultValue == true) {
+                $this->session->set_tempdata("message", "Well done! Successfully Updated .", 2);
+               // redirect(current_url());
+            }
+        
         }
-        $result['college'] = $this->BaseModel->featchRow("colleges", '*', $where);
-        //  var_dump($result); exit;
-        $html = $this->load->view('admin/editStaff', $result, TRUE);
-        $this->templet('home', $html, '', '', '');
+        $this->load->model("Student_model");
+         $result['studentList'] = $this->Student_model->singleviewStudent($this->userid,$id);
+    
+         $where = array(
+            "status" => 1,
+            "created_by" => $this->userid
+        );
+        $result['batches'] = $this->BaseModel->featchData("batches", '*', $where);
+        $result['courses'] = $this->BaseModel->featchData("courses", '*', $where);
+        $html = $this->load->view('admin/viewStudent', $result, TRUE);
+        $this->templet('home', $html, '', $error, $success);
     }
 
     public function deleteStudent($id) {
@@ -273,5 +314,49 @@ class Student extends CI_Controller {
         $html = $this->load->view('admin/listStaff', $result, TRUE);
         $this->templet('home', $html, '', $error, $success);
     }
+    public function deleteCourse($id) {
+        $this->load->model("DeleteModel");
+        $result = $this->DeleteModel->did_delete_row($id, 'courses', 'id');
+        if ($result == true) {
+            $this->session->set_tempdata("message", "Successfully Deleted  Course.", 2);
+        }
+        $result = '';
+        $success = '';
+        $error = '';
+        $where = array('status' => 1, "created_by" => $this->userid);
+        $result['courses'] = $this->BaseModel->featchData("courses", '*', $where);
 
+        $html = $this->load->view('admin/listCourses', $result, TRUE);
+        $this->templet('home', $html, '', $error, $success);
+    }
+     public function deleteBatch($id) {
+        $this->load->model("DeleteModel");
+        $result = $this->DeleteModel->did_delete_row($id, 'batches', 'id');
+        if ($result == true) {
+            $this->session->set_tempdata("message", "Successfully Deleted  Class.", 2);
+        }
+        $result = '';
+        $success = '';
+        $error = '';
+        $where = array('status' => 1, "created_by" => $this->userid);
+        $result['batches'] = $this->BaseModel->featchData("batches", '*', $where);
+
+        $html = $this->load->view('admin/listCourses', $result, TRUE);
+        $this->templet('home', $html, '', $error, $success);
+    }
+     public function deleteSubject($id) {
+        $this->load->model("DeleteModel");
+        $result = $this->DeleteModel->did_delete_row($id, 'subjects', 'id');
+        if ($result == true) {
+            $this->session->set_tempdata("message", "Successfully Deleted  Suject.", 2);
+        }
+        $result = '';
+        $success = '';
+        $error = '';
+        $where = array('status' => 1, "created_by" => $this->userid);
+        $result['subjects'] = $this->BaseModel->featchData("subjects", '*', $where);
+
+        $html = $this->load->view('admin/listCourses', $result, TRUE);
+        $this->templet('home', $html, '', $error, $success);
+    }
 }
