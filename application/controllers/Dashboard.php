@@ -24,18 +24,23 @@ class Dashboard extends CI_Controller {
         $error = '';
         $success = '';
         
-        // var_dump($result);
-        if ($this->role_id == 2) {
-            
+        
+        if ($this->role_id == 2) {            
             $where = array("role_id" => 3,"created_by"=>$this->userid);
             $data['employeess'] = $this->BaseModel->featchCountOfRows("members", $where);
+             $where = array("role_id" => 5,"created_by"=>$this->userid);
+            $data['students'] = $this->BaseModel->featchCountOfRows("members", $where);
+            $this->load->model("Student_model");
+            $data['studentList'] = $this->Student_model->listviewStudent($this->userid);
             $html = $this->load->view('dashboard_p_view', $data, TRUE);
         } else if ($this->role_id == 1) {
+           
             $data['total_college_count'] = $this->BaseModel->featchCountOfRows("colleges");
             $where = array('status' => 1,);
             $data['active_colleges'] = $this->BaseModel->featchCountOfRows("colleges", $where);
             $html = $this->load->view('dashboard_view', $data, TRUE);
         }else{
+           
             $html = $this->load->view('dashboard_other_view', $data, TRUE);
         }
         $this->templet('home', $html, '', $error, $success);

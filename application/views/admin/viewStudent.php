@@ -1,7 +1,7 @@
 
 <div class="br-mainpanel">
     <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5">Add Student</h4>
+        <h4 class="tx-gray-800 mg-b-5"> Student Info</h4>
 
     </div><!-- d-flex -->
 

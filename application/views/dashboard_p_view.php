@@ -28,7 +28,7 @@
                 <i class="ion ion-monitor tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Students</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?= $employeess; ?></p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?= $students; ?></p>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
                   <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Newly Registered Students</h6>
                   <p class="mg-b-0"><i class="icon ion-calendar mg-r-5"></i> Total joined Students this year.</p>
                 </div>
-                <a href="" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">View All ..</a>
+                <a href="<?= site_url('Student/studentList  '); ?>" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">View All ..</a>
               </div><!-- d-flex -->
 
               <table class="table table-valign-middle mg-b-0">
@@ -76,92 +76,25 @@
 					  
 				  </thead>
                 <tbody>
+                    <?php if(!empty($studentList))
+                    {
+                        foreach($studentList as $stu){ ?>
+                        
                   <tr>
                     <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">Deborah Miner</h6>
-                      <span class="tx-12">@deborah.miner</span>
+                      <h6 class="tx-inverse tx-14 mg-b-0"><?php echo $stu->stu_first_name; ?></h6>
+                      <span class="tx-12"><?php echo $stu->email; ?></span>
                     </td>
-                    <td>Nov 01, 2017</td>
+                    <td><?php echo $stu->stu_admission_date; ?></td>
                     <td class="pd-r-0-force tx-center"><a href="" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
                   </tr>
-                  <tr>
-                    <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">Belinda Connor</h6>
-                      <span class="tx-12">@belinda.connor</span>
-                    </td>
-                    <td>Oct 28, 2017</td>
-                    <td class="pd-r-0-force tx-center"><a href="" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">Andrew Wiggins</h6>
-                      <span class="tx-12">@andrew.wiggins</span>
-                    </td>
-                    <td>Oct 27, 2017</td>
-                    <td class="pd-r-0-force tx-center"><a href="" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">Brandon Lawrence</h6>
-                      <span class="tx-12">@brandon.lawrence</span>
-                    </td>
-                    <td>Oct 27, 2017</td>
-                    <td class="pd-r-0-force tx-center"><a href="" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">Marilyn Tarter</h6>
-                      <span class="tx-12">@marilyn.tarter</span>
-                    </td>
-                    <td>Oct 27, 2017</td>
-                    <td class="pd-r-0-force tx-center"><a href="" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
-                  </tr>
+                    <?php } } ?>
                 </tbody>
               </table>
             </div><!-- card -->
 
           </div><!-- col-9 -->
-          <div class="col-4">
-
-
-            <div class="card bd-0 shadow-base pd-30">
-              <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Sales Report</h6>
-              <p class="mg-b-25">Total sales this year monthly.</p>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">January (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">February (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar bg-teal wd-60p" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">March (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar bg-danger wd-70p" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">April (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar bg-warning wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">May (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar bg-info wd-45p" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-              <label class="tx-12 tx-gray-600 mg-b-10">June (62 Colleges)</label>
-              <div class="progress ht-5 mg-b-10">
-                <div class="progress-bar bg-purple wd-65p" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-            </div><!-- card -->
-
-
-          </div><!-- col-3 -->
+         
         </div><!-- row -->
 
       </div><!-- br-pagebody -->
