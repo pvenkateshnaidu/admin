@@ -2,7 +2,7 @@
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
       <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5">College List tt</h4>
+        <h4 class="tx-gray-800 mg-b-5">College List </h4>
         <p class="mg-b-0">Super admin manages the colleges add or delete.</p>
       </div><!-- d-flex -->
    
