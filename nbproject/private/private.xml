@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/admin/application/views/header.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/controllers/Student.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/listStudents.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/addStudent.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/addStaff.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/addBatch.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/listStaff.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/config/form_validation.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/models/Teacher_model.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/addCourse.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/controllers/Teacher.php</file>
+            <file>file:/C:/xampp/htdocs/admin/application/views/admin/addSubject.php</file>
+        </group>
+    </open-files>
+</project-private>
