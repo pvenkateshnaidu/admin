@@ -223,6 +223,14 @@
                             ?>">Students List              
                             </a><!-- br-menu-link -->
                         </li>
+                      <li  class="nav-item">
+                            <a href="<?= site_url('Import/index'); ?>" class="nav-link <?php
+                            if ($this->uri->segment(2) == "index") {
+                                echo "active";
+                            }
+                            ?>">Import Students              
+                            </a><!-- br-menu-link -->
+                        </li>
                     </ul>
 
 
