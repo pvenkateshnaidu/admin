@@ -142,7 +142,7 @@
                     }
                     ?>">
                         <div class="br-menu-item">
-                        <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
+                            <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
                             <span class="menu-item-label">Subjects</span>
                             <i class="menu-item-arrow fa fa-angle-down"></i>
                         </div><!-- menu-item -->
@@ -171,7 +171,7 @@
                     }
                     ?>">
                         <div class="br-menu-item">
-                          <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+                            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
                             <span class="menu-item-label">Faculty</span>
                             <i class="menu-item-arrow fa fa-angle-down"></i>
                         </div><!-- menu-item -->
@@ -201,7 +201,7 @@
                     }
                     ?>">
                         <div class="br-menu-item">
-                          <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
                             <span class="menu-item-label">Students</span>
                             <i class="menu-item-arrow fa fa-angle-down"></i>
                         </div><!-- menu-item -->
@@ -223,7 +223,7 @@
                             ?>">Students List              
                             </a><!-- br-menu-link -->
                         </li>
-                      <li  class="nav-item">
+                        <li  class="nav-item">
                             <a href="<?= site_url('Import/index'); ?>" class="nav-link <?php
                             if ($this->uri->segment(2) == "index") {
                                 echo "active";
@@ -232,7 +232,17 @@
                             </a><!-- br-menu-link -->
                         </li>
                     </ul>
-
+                    <a href="<?= site_url('Attendance'); ?>" class="br-menu-link <?php
+                    if (($this->uri->segment(2) == "attendance") || ($this->uri->segment(2) == "att")) {
+                        echo "active show-sub";
+                    }
+                    ?>">
+                        <div class="br-menu-item">
+                            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                            <span class="menu-item-label">Attendance</span>
+                            <i class="menu-item-arrow fa fa-angle-down"></i>
+                        </div><!-- menu-item -->
+                    </a><!-- br-menu-link -->
 
 
                 <?php } ?>
@@ -384,7 +394,7 @@
                     </div><!-- dropdown -->
                     <div class="dropdown">
                         <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-                            <span class="logged-name hidden-md-down"><?php  echo $this->session->userdata("userid");            ?></span>
+                            <span class="logged-name hidden-md-down"><?php echo $this->session->userdata("userid"); ?></span>
                             <img src="http://via.placeholder.com/64x64" class="wd-32 rounded-circle" alt="">
                             <span class="square-10 bg-success"></span>
                         </a>

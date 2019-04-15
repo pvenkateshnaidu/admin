@@ -341,7 +341,7 @@ class Student extends CI_Controller {
         $where = array('status' => 1, "created_by" => $this->userid);
         $result['batches'] = $this->BaseModel->featchData("batches", '*', $where);
 
-        $html = $this->load->view('admin/listCourses', $result, TRUE);
+        $html = $this->load->view('admin/listBatches', $result, TRUE);
         $this->templet('home', $html, '', $error, $success);
     }
      public function deleteSubject($id) {
@@ -356,7 +356,7 @@ class Student extends CI_Controller {
         $where = array('status' => 1, "created_by" => $this->userid);
         $result['subjects'] = $this->BaseModel->featchData("subjects", '*', $where);
 
-        $html = $this->load->view('admin/listCourses', $result, TRUE);
+        $html = $this->load->view('admin/listSubjects', $result, TRUE);
         $this->templet('home', $html, '', $error, $success);
     }
 }

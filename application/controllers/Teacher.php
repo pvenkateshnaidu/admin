@@ -46,6 +46,7 @@ class Teacher extends CI_Controller
 
     }
     public function addTeacher() {
+         ob_start();
       $result= array();
         $result["success_message"]='';
          $result["error_message"]='';
