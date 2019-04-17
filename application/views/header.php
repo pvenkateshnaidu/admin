@@ -233,7 +233,7 @@
                         </li>
                     </ul>
                   <!--  <?= site_url('Attendance'); ?> -->
-                    <a href="#" class="br-menu-link <?php
+                    <a href=" <?= site_url('Attendance'); ?> " class="br-menu-link <?php
                     if (($this->uri->segment(2) == "attendance") || ($this->uri->segment(2) == "att")) {
                         echo "active show-sub";
                     }

@@ -85,6 +85,17 @@ where m.created_by=$id AND  m.mid=$stid";
         $result = $this->db->query($sql);
         return $result->result();
     }
+    public function listviewStudentAttendance($userid,$courseId,$batchId,$subjectId)
+    {
+        $sql = "SELECT * FROM members m INNER JOIN stu_master as stu on m.stu_master_id=stu.stu_master_id 
+INNER JOIN stu_info as info on stu.stu_master_stu_info_id=info.stu_info_id 
+INNER JOIN courses as c on stu.stu_master_course_id=c.id
+INNER JOIN batches as b on stu.stu_master_batch_id = b.id
+where m.created_by=$userid and c.id=$courseId and b.id=$batchId";
+
+        $result = $this->db->query($sql);
+        return $result->result();
+    }
 
 }
 

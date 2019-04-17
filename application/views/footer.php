@@ -148,7 +148,188 @@
     },
     errorElement: "em",
   }); */
+      function saveabsent() {
+        var date = $('#Studentabsent_date').val();
+        var date = new Date(date).setHours(0, 0, 0, 0);
+        var now = (new Date()).setHours(0, 0, 0, 0);
+        if (date > now) {
+            alert("Date must be less than or equal to current date");
+            return;
+        } else {
+            var student = [];
+            var studentabsent = [];
+            var studentids = [];
+            $('#studentattendence tbody tr').each(function (row, tr) {
+
+              if ($(this).find(".checkbox").prop("checked")) {
+                    //var amount = $(tr).find('td:eq(3)').text();
+                    var studentid = $(tr).find('td:eq(0)').data('id');
+
+                    var remark = $(tr).find('td:eq(4) input').val();
+
+                    student.push(studentid);
+                    student.push(remark);
+                    if ($(this).find(".checkbox1").prop("checked")) {
+                        student.push(1);
+                    } else {
+                        student.push(0);
+                    }
+
+                    studentids.push(studentid);
+                } else {
+                    var studentid = $(tr).find('td:eq(0)').data('id');
+                    studentabsent.push(studentid);
+                    studentids.push(studentid);
+                }
+
+            });
+            var sendarray = JSON.stringify(student);
+            var studentabsentarray = JSON.stringify(studentabsent);
+            var studentids = JSON.stringify(studentids);
+            
+            $.ajax({
+                type: "POST",
+                url: siteUrl+"Attendance/Conformationfordeletingattendance",
+                data: {date: $('#Studentabsent_date').val(), studentids: studentids,subjectid: $('#Studentabsent_subjectid option:selected').val()},
+                dataType: "html",
+                success: function (data) {
+                    if (data == "success") {
+                        if (confirm("Student attendance already marked for this day.Are you sure you want to save over existing data?")) {
+                            $.ajax({
+                                type: "POST",
+                                url: siteUrl+"Attendance/Saveattendence",
+                                data: {courseid: $('#Studentabsent_courseid option:selected').val(), batchid: $('#Studentabsent_batchid option:selected').val(), subjectid: $('#Studentabsent_subjectid option:selected').val(), sendarray: sendarray, date: $('#Studentabsent_date').val(), studentabsentarray: studentabsentarray},
+                                dataType: "html",
+                                success: function (data) {
+                                    alert("Successfully saved");
+                                  //  location.reload();
+
+                                }
+                            })
+                        } else {
+                            location.reload();
+                        }
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: siteUrl+"Attendance/Saveattendence",
+                            data: {courseid: $('#Studentabsent_courseid option:selected').val(), batchid: $('#Studentabsent_batchid option:selected').val(), subjectid: $('#Studentabsent_subjectid option:selected').val(), sendarray: sendarray, date: $('#Studentabsent_date').val(), studentabsentarray: studentabsentarray},
+                            dataType: "html",
+                            success: function (data) {
+                                alert("Successfully saved");
+                               // location.reload();
+
+                            }
+                        })
+                    }
+
+                }
+            })
+
+        }
+    }
+
+    	$(document).ready(function () {
+        var droplist = $('#Studentabsent_date');
+        droplist.change(function () {
+            var date = $('#Studentabsent_date').val();
+            var date = new Date(date).setHours(0,0,0,0);
+			var now = ( new Date() ).setHours(0,0,0,0);
+			if (date > now) {
+				alert("Date must be less than or equal to current date");
+				document.getElementById('Studentabsent_date').value='';
+				return;
+				}
+			})
+    });
+          $(document).ready(function () {
+        var droplist = $('#Student_courseid');
+        droplist.change(function () {
+            
+         $("#Student_batchid").val('');
+            $.ajax({
+                type: "POST",
+                url: siteUrl+"Attendance/Viewdropdown",
+                data: {courseid: $('#Student_courseid option:selected').val()},
+                dataType: "html",
+                success: function (data) {
+                    
+                 $("#Student_batchid").empty();
+                 $("#Student_batchid").append(data);
+                       // $('#Batch_daily').hide("slow");
+                       
+                   
+                }
+            }); 
+        })
+    });
+      $(document).ready(function () {
+        var droplist = $('#Studentabsent_courseid');
+        droplist.change(function () {
+            $('#studentattendence tbody').empty();
+         $("#Studentabsent_subjectid").val('');
+            $.ajax({
+                type: "POST",
+                url: "Attendance/Viewdropdown",
+                data: {courseid: $('#Studentabsent_courseid option:selected').val()},
+                dataType: "html",
+                success: function (data) {
+                      $("#Batch_subject").show();
+                     $("#subject").show();
+                     $("#date").show();
+                 $("#Studentabsent_batchid").empty();
+                 $("#Studentabsent_batchid").append(data);
+                       // $('#Batch_daily').hide("slow");
+                       
+                   
+                }
+            }); 
+        })
+    });
+    $(document).ready(function () {
+        var droplist = $('#Studentabsent_batchid');
+        droplist.change(function () {
+            $('#studentattendence tbody').empty();
+             $("#Studentabsent_subjectid").val('');
+        });
+    });
+        $(document).ready(function () {
+        var droplist = $('#Studentabsent_subjectid');
+        droplist.change(function () {
+           
+           
+            $("#attendancediv").show();
+           $('#studentattendence tbody').empty();
+            
+            $.ajax({
+                type: "POST",
+                url: "Attendance/Attendencelist_sub",
+                data: {courseid: $('#Studentabsent_courseid option:selected').val(), batchid: $('#Studentabsent_batchid option:selected').val(), subjectid: $('#Studentabsent_subjectid option:selected').val()},
+                dataType: "html",
+                success: function (data) {
+                    $('#studentattendence tbody').append(data);
+                    $('#attendancediv').show("slow");
+                }
+            }); 
+        })
+    });
+    
+     $(document).ready(function () {
+        $('#checkall').click(function (event) {  //on click 
+            if (this.checked) { // check select status
+                $('.checkbox').each(function () { //loop through each checkbox
+                    this.checked = true;  //select all checkboxes with class "checkbox1"               
+                });
+            } else {
+                $('.checkbox').each(function () { //loop through each checkbox
+                    this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+                });
+            }
+        });
+
+    });
   </script>
+  
   </body>
 </html>
 
