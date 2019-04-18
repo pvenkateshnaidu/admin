@@ -64,12 +64,21 @@ class Attendance extends CI_Controller {
         die();
     }
 
-    public function Conformationfordeletingattendance() {
+    public function Conformationfordeletingattendance()
+   {
+        $subjectid = $this->input->post('subjectid');
+        $student = $this->input->post('studentids');
+        $date = $this->input->post('date');
+        $attendanceby =  $this->userid;
+        $studentPresents=array_values(array_filter(json_decode(stripslashes($student))));
+        
+       
         echo "hi";
         exit;
     }
 
     public function Saveattendence() {
+        
         $courseId = $this->input->post('courseid');
         $batchId = $this->input->post('batchid');
         $subjectId = $this->input->post('subjectid');
@@ -77,6 +86,37 @@ class Attendance extends CI_Controller {
         $studentAbsents = $this->input->post('studentabsentarray');
         $date = $this->input->post('date');
         $attendanceby =  $this->userid;
+        $studentPresents=array_values(array_filter(json_decode(stripslashes($studentPresents))));
+        $studentAbsents=array_values(array_filter(json_decode(stripslashes($studentAbsents))));
+       //var_dump($studentPresents);exit;
+        for($i=0;$i<sizeof($studentPresents);$i++)
+        {
+            $result[]=array("member_id"=>$studentPresents[$i],
+                "course_id"=>$courseId,
+                "batch_id"=>$batchId,
+                "subject_id"=>$subjectId,
+                "remarks"=>"",
+                "date"=>$date,
+                "attendance_by"=>$attendanceby,
+                "mark"=>"P",
+               );
+        }
+        for($i=0;$i<sizeof($studentAbsents);$i++)
+        {
+            $result[]=array("member_id"=>$studentAbsents[$i],
+                "course_id"=>$courseId,
+                "batch_id"=>$batchId,
+                "subject_id"=>$subjectId,
+                "remarks"=>"",
+                "date"=>$date,
+                "attendance_by"=>$attendanceby,
+                "mark"=>"A",
+               );
+        }
+        
+            $this->load->model("Attendance_model");
+            $this->Attendance_model->setBatchImport($result);
+            $this->Attendance_model->importData();
         
         echo "hi";
         exit;

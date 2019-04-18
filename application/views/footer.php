@@ -217,7 +217,7 @@
                             dataType: "html",
                             success: function (data) {
                                 alert("Successfully saved");
-                               // location.reload();
+                                location.reload();
 
                             }
                         })

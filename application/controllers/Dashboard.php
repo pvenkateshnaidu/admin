@@ -32,6 +32,16 @@ class Dashboard extends CI_Controller {
             $data['students'] = $this->BaseModel->featchCountOfRows("members", $where);
             $this->load->model("Student_model");
             $data['studentList'] = $this->Student_model->listviewStudent($this->userid);
+             $where = array(
+            "status" => 1,
+            "created_by" => $this->userid
+        );
+        $data['courses'] = $this->BaseModel->featchCountOfRows("courses",$where);
+         $where = array(
+            "status" => 1,
+            "created_by" => $this->userid
+        );
+        $data['classes'] = $this->BaseModel->featchCountOfRows("batches",$where);
             $html = $this->load->view('dashboard_p_view', $data, TRUE);
         } else if ($this->role_id == 1) {
            
