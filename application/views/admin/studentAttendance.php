@@ -29,7 +29,7 @@
                     <div class="form-group col-sm-3 validating" id="course">
                         <label for="reg_input" class="req">Course</label>
                         <select class="form-control" name="courseid" id="Studentabsent_courseid">
-                            <option value="">SelectCourse</option>
+                            <option value="">Select Course</option>
                             <?php foreach ($courses as $course) { ?>
                                 <option value="<?= $course->id; ?>"><?= strtoupper($course->course_name); ?></option>
                             <?php } ?>
